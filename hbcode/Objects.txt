@@ -1,0 +1,12 @@
+ try{
+            List depositRateList = getCriteria().add(Restrictions.eq("accountType",1)).setProjection(Projections.projectionList()
+                    .add(Projections.property("accountSubTypeCode")).add(Projections.property("depositRate"))).list();
+            for(Object obj:depositRateList){
+                Object[] objects =(Object[])obj;
+                codeWithDeposit.put((Integer)objects[0],(BigDecimal)objects[1]);
+            }
+
+        }catch(HibernateException hbe){
+            hbe.printStackTrace();
+        }
+        return codeWithDeposit;
